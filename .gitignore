@@ -1,2 +1,4 @@
 # ignore node_modules directory
 node_modules
+bs3-starter.sublime-project
+bs3-starter.sublime-workspace
