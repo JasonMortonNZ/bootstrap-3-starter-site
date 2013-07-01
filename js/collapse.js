@@ -1,7 +1,7 @@
-/* =============================================================
+/* ========================================================================
  * Bootstrap: collapse.js v3.0.0
  * http://twitter.github.com/bootstrap/javascript.html#collapse
- * =============================================================
+ * ========================================================================
  * Copyright 2012 Twitter, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,10 +15,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * ============================================================ */
+ * ======================================================================== */
 
 
-!function ($) { "use strict";
++function ($) { "use strict";
 
   // COLLAPSE PUBLIC CLASS DEFINITION
   // ================================
@@ -77,7 +77,7 @@
       [dimension](size || 'auto')
       [0].offsetWidth
 
-    this.$element[size !== null ? 'addClass' : 'removeClass']('collapse')
+    this.$element[size != null ? 'addClass' : 'removeClass']('collapse')
 
     return this
   }
@@ -139,13 +139,16 @@
   // COLLAPSE DATA-API
   // =================
 
-  $(document).on('click.collapse.data-api', '[data-toggle=collapse]', function (e) {
+  $(document).on('click.bs.collapse.data-api', '[data-toggle=collapse]', function (e) {
     var $this  = $(this), href
     var target = $this.attr('data-target')
         || e.preventDefault()
         || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') //strip for ie7
     var option = $(target).data('collapse') ? 'toggle' : $this.data()
+    var parent = $this.attr('data-parent')
+    var $parent = parent && $(parent)
 
+    if ($parent) $parent.find('[data-toggle=collapse][data-parent=' + parent + ']').not($this).addClass('collapsed')
     $this[$(target).hasClass('in') ? 'addClass' : 'removeClass']('collapsed')
     $(target).collapse(option)
   })
